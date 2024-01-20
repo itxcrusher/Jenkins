@@ -13,22 +13,24 @@ pipeline {
     }
 
     stages {
-        stage('Check IP') {
-            steps {
+        stage('Check'){
+            steps{
                 sh "curl ifconfig.me"
             }
         }
-        stage('Check Directory') {
+        stage('Start') {
             steps {
+                sh "echo 'Starting'"
+                /*
                 dir(WORKING_DIRECTORY) {
                     sh "ls"
-                    //sh "git pull origin main"
-                }
+                }*/
             }
         }
         stage('Build'){
             steps{
-                sh "git"
+                sh "echo 'Building'"
+                //sh "git pull origin main"
             }
         }
         stage('Deploy'){
