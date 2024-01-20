@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    triggers {
+        pollSCM('')
+      }
+
+    environment {
+        GITHUB_CREDENTIALS = credentials('722836ee-2f9a-4924-a4d5-03459083bd5d')
+        EC2_INSTANCE = '34.201.69.100'
+        EC2_SSH_CREDENTIALS = 'c8f23aef-1897-4c34-bfd7-8b04d912c5d5'
+        WORKING_DIRECTORY = '~'
+        //'/var/www/html/test/'
+    }
+
+    stages {
+        stage('Start') {
+            steps {
+                dir(WORKING_DIRECTORY) {
+                    sh "curl ifconfig.me"
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir(WORKING_DIRECTORY) {
+                    sh "pwd"
+                    //sh "git pull origin main"
+                }
+            }
+        }
+        stage('Deploy'){
+            steps{
+                sh "echo 'Deploying'"
+                //sh "sudo systemctl reload apache2"
+            }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                sh "echo 'Archiving'"
+                //archiveArtifacts 'target/*.jar'
+            }
+        }
+
+    }
+}

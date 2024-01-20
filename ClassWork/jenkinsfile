@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        EC2_INSTANCE          = 'your-ec2-instance-ip'
+        GITHUB_REPO           = 'your-github-repo'
+        GITHUB_CREDS_ID       = 'your-github-credentials-id'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Add your build commands here
+                    sh 'echo "Building"'
+                }
+            }
+        }
+
+        stage('Deploy to EC2') {
+            steps {
+                script {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_ACCESS_KEY_ID'],
+                                     [$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_SECRET_ACCESS_KEY', credentialsId: 'AWS_SECRET_ACCESS_KEY']]) {
+                        // Copy artifacts to EC2 instance
+                        sh "scp -i /path/to/your/ec2/key.pem -o StrictHostKeyChecking=no -r target/ ec2-user@${EC2_INSTANCE}:/path/to/destination"
+
+                        // SSH into EC2 and execute deployment script
+                        sh "ssh -i /path/to/your/ec2/key.pem -o StrictHostKeyChecking=no ec2-user@${EC2_INSTANCE} 'cd /path/to/destination && ./deploy.sh'"
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Define credentials function to retrieve secret text
+def credentials(credentialId) {
+    withCredentials([string(credentialsId: credentialId, variable: credentialId)]) {
+        return env[credentialId]
+    }
+}
