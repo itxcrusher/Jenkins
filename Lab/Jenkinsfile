@@ -14,12 +14,17 @@ pipeline {
     }
 
     stages {
+        stage('Check IP 1') {
+            steps {
+                sh "curl ifconfig.me"
+            }
+        }
         stage('SSH'){
             steps{
                 sh 'ssh -i key.pem ubuntu@ec2-54-237-211-142.compute-1.amazonaws.com'
             }
         }
-        stage('Check IP') {
+        stage('Check IP 2') {
             steps {
                 sh "curl ifconfig.me"
             }
