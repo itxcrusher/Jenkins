@@ -20,29 +20,24 @@ pipeline {
         }
         stage('Start') {
             steps {
-                sh "echo 'Starting'"
-                /*
                 dir(WORKING_DIRECTORY) {
                     sh "ls"
-                }*/
+                }
             }
         }
         stage('Build'){
             steps{
-                sh "echo 'Building'"
-                //sh "git pull origin main"
+                sh "git pull origin main"
             }
         }
         stage('Deploy'){
             steps{
-                sh "echo 'Deploying'"
-                //sh "sudo systemctl reload apache2"
+                sh "sudo systemctl reload apache2"
             }
         }
         stage('Archive Artifacts') {
             steps {
-                sh "echo 'Archiving'"
-                //archiveArtifacts 'target/*.jar'
+                archiveArtifacts 'target/*.jar'
             }
         }
 
