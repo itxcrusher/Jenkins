@@ -17,8 +17,6 @@ pipeline {
         stage('Check') {
             steps {
                 sh "curl ifconfig.me"
-            }
-            steps {
                 sh "ls"
                 //sh "git pull origin main"
             }
