@@ -9,7 +9,7 @@ pipeline {
         GITHUB_CREDENTIALS = credentials('722836ee-2f9a-4924-a4d5-03459083bd5d')
         EC2_INSTANCE = '54.237.211.142'
         EC2_SSH_CREDENTIALS = 'c8f23aef-1897-4c34-bfd7-8b04d912c5d5'
-        WORKING_DIRECTORY = '/var/www/html/test/'
+        WORKING_DIRECTORY = '/var/www/html/'
     }
 
     stages {
