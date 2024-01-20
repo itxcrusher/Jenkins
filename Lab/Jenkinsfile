@@ -21,15 +21,11 @@ pipeline {
         }
         stage('Check Directory') {
             steps {
-                sh "ls"
-                //sh "git pull origin main"
-            }
-        }
-        stage('Check Directory') {
-            dir(WORKING_DIRECTORY) {
+                dir(WORKING_DIRECTORY) {
                     sh "ls"
                     //sh "git pull origin main"
                 }
+            }
         }
         stage('Deploy'){
             steps{
