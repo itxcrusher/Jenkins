@@ -11,7 +11,7 @@ sudo docker rmi app
 #sudo docker rmi $(docker images -aq)
 
 # Build a new Docker image from the Dockerfile
-sudo docker build -t app:latest ../flaskApp/
+sudo docker build -t app:latest .
 
 # Run a new container from the built image
 docker run -d -p 5000:5000 app:latest
