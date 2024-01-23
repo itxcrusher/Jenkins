@@ -1,17 +1,17 @@
 pipeline {
-    agent any
+    agent Slave
     /*
     triggers {
         pollSCM('')
       }
-      */
+      
     environment {
         GITHUB_CREDENTIALS = credentials('4bce3c62-c683-41d9-bc63-d9ffd4385df7')
         REMOTE_EC2_IP = '54.205.183.102'
         EC2_SSH_CREDENTIALS = 'd608d6af-e1f6-41ea-9d46-e6502262e197'
         //WORKING_DIRECTORY = '/var/www/html/'
     }
-
+    */
     stages {
         stage('Check'){
             steps{
@@ -24,7 +24,7 @@ pipeline {
                     sh "ls"
                 //}
             }
-        }
+        }/*
         stage('Checkout from GitHub') {
             steps {
                 script {
@@ -40,7 +40,7 @@ pipeline {
                     sh 'scp -r Ansible ubuntu@54.205.183.102:/var/www/html/'
                 }
             }
-        }
+        }*/
         /*
         stage('Build'){
             steps{
