@@ -1,5 +1,10 @@
 pipeline {
-    agent Slave
+    agent{
+        node {
+            label 'Slave'
+            customWorkspace '/var/www/html'
+        }
+    }
     /*
     triggers {
         pollSCM('')
