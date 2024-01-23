@@ -28,14 +28,24 @@ pipeline {
                 sh "pwd"
             }
         }
-        stage('Build'){
+        stage('Set Permissions'){
             steps{
                 sh "sudo chmod +x ./Lab/task.sh"
             }
         }
-        stage('Deploy') {
+        stage('Execute Task') {
             steps {
                 sh "./Lab/task.sh"
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "sudo docker build -t app:latest ./Lab/"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "sudo docker run -d -p 5000:5000 app:latest"
             }
         }
         /*
