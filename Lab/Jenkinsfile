@@ -10,6 +10,8 @@ pipeline {
         //REMOTE_EC2_IP = '54.205.183.102'
         EC2_SSH_CREDENTIALS = '9bd2408c-e040-4f9e-a11b-133a47f4906f'
         //WORKING_DIRECTORY = '/var/www/html/'
+        AWS_DEFAULT_REGION    = 'us-east-1'
+        S3_BUCKET             = 'archived-artifacts-12'
     }
     
     stages {
@@ -51,7 +53,13 @@ pipeline {
         stage('Archive Artifacts') {
             steps {
                 sh "echo 'Archiving Artifacts'"
-                //archiveArtifacts 'target/*.jar'
+                archiveArtifacts '/*.jar'
+                /*
+                script {
+                    sh "dd if=/dev/urandom of=artifact.txt bs=5MB count=1"
+                }
+                archiveArtifacts artifacts: "*.*", fingerprint: true
+                */
             }
         }
 
