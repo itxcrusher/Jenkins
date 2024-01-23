@@ -50,20 +50,8 @@ pipeline {
                 sh "sudo docker run -d -p 5000:5000 app:latest"
             }
         }
-        stage('Create Artifacts') {
-            steps {
-                //sh 'cp /Lab/artifact.jar /artifacts/'
-                sh 'echo "Hello World" > hello.txt'
-            }
-        }
         stage('Archive Artifacts') {
             steps {
-                //archiveArtifacts(artifacts: '**/*.jar', followSymlinks: false)
-                /*                
-                script {
-                    sh "dd if=/dev/urandom of=artifact.txt bs=5MB count=1"
-                }
-                */
                 archiveArtifacts artifacts: '**/*.jar, **/*.war, **/*.txt',
                    allowEmptyArchive: true,
                    fingerprint: true,
