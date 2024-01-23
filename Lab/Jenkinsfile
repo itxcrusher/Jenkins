@@ -4,14 +4,14 @@ pipeline {
             label 'Slave'
         }
     }
-    /*
+    
     environment {
-        GITHUB_CREDENTIALS = credentials('4bce3c62-c683-41d9-bc63-d9ffd4385df7')
-        REMOTE_EC2_IP = '54.205.183.102'
-        EC2_SSH_CREDENTIALS = 'd608d6af-e1f6-41ea-9d46-e6502262e197'
-        WORKING_DIRECTORY = '/var/www/html/'
+        GITHUB_CREDENTIALS = credentials('2474e17d-8585-4519-b614-0aaaf0f0ed18')
+        //REMOTE_EC2_IP = '54.205.183.102'
+        EC2_SSH_CREDENTIALS = '9bd2408c-e040-4f9e-a11b-133a47f4906f'
+        //WORKING_DIRECTORY = '/var/www/html/'
     }
-    */
+    
     stages {
         stage('Check Host') {
             steps {
@@ -48,12 +48,12 @@ pipeline {
                 sh "sudo docker run -d -p 5000:5000 app:latest"
             }
         }
-        /*
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts 'target/*.jar'
+                sh "echo 'Archiving Artifacts'"
+                //archiveArtifacts 'target/*.jar'
             }
         }
-        */
+
     }
 }
