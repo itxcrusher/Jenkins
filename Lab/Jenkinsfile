@@ -2,66 +2,43 @@ pipeline {
     agent{
         node {
             label 'Slave'
-            customWorkspace '/var/www/html'
         }
     }
     /*
-    triggers {
-        pollSCM('')
-      }
-      
     environment {
         GITHUB_CREDENTIALS = credentials('4bce3c62-c683-41d9-bc63-d9ffd4385df7')
         REMOTE_EC2_IP = '54.205.183.102'
         EC2_SSH_CREDENTIALS = 'd608d6af-e1f6-41ea-9d46-e6502262e197'
-        //WORKING_DIRECTORY = '/var/www/html/'
+        WORKING_DIRECTORY = '/var/www/html/'
     }
     */
     stages {
-        stage('Check'){
-            steps{
+        stage('Check Host') {
+            steps {
+                sh "hostname"
+            }
+        }
+        stage('Verify IP') {
+            steps {
                 sh "curl ifconfig.me"
             }
         }
-        stage('Start') {
+        stage('Check Directory') {
             steps {
-                //dir(WORKING_DIRECTORY) {
-                    sh "ls"
-                //}
-            }
-        }/*
-        stage('Checkout from GitHub') {
-            steps {
-                script {
-                    // Checkout code from GitHub
-                    git credentialsId: GITHUB_CREDENTIALS, url: 'https://github.com/itxcrusher/Jenkins.git', branch: 'main'
-                }
+                sh "pwd"
             }
         }
-        stage('Deploy to Managed Instance') {
-            steps {
-                script {
-                    // Copy files to the managed instance
-                    sh 'scp -r Ansible ubuntu@54.205.183.102:/var/www/html/'
-                }
-            }
-        }*/
         /*
         stage('Build'){
             steps{
                 sh "git pull origin main"
             }
         }
-        stage('Deploy'){
-            steps{
-                sh "sudo systemctl reload apache2"
-            }
-        }
         stage('Archive Artifacts') {
             steps {
                 archiveArtifacts 'target/*.jar'
             }
-        }*/
-
+        }
+        */
     }
 }
