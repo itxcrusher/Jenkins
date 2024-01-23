@@ -28,12 +28,12 @@ pipeline {
                 sh "pwd"
             }
         }
-        /*
-        stage('Build'){
-            steps{
-                sh "git pull origin main"
+        stage('Deploy App') {
+            steps {
+                sh "./task.sh"
             }
         }
+        /*
         stage('Archive Artifacts') {
             steps {
                 archiveArtifacts 'target/*.jar'
