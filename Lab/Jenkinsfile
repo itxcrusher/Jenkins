@@ -40,6 +40,7 @@ pipeline {
                     sh 'scp -r Ansible ubuntu@54.205.183.102:/var/www/html/'
                 }
             }
+        }
         /*
         stage('Build'){
             steps{
