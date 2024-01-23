@@ -28,9 +28,14 @@ pipeline {
                 sh "pwd"
             }
         }
-        stage('Deploy App') {
+        stage('Build'){
+            steps{
+                sh "sudo chmod +x ./Lab/task.sh"
+            }
+        }
+        stage('Deploy') {
             steps {
-                sh "./task.sh"
+                sh "./Lab/task.sh"
             }
         }
         /*
