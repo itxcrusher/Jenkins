@@ -53,7 +53,7 @@ pipeline {
         stage('Archive Artifacts') {
             steps {
                 sh "echo 'Archiving Artifacts'"
-                archiveArtifacts 'artifact.txt'
+                //archiveArtifacts 'artifact.txt'
                 //archiveArtifacts '/*.jar'
                 /*
                 script {
