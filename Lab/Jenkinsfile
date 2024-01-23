@@ -4,13 +4,13 @@ pipeline {
     triggers {
         pollSCM('')
       }
-
+    /*
     environment {
         GITHUB_CREDENTIALS = credentials('722836ee-2f9a-4924-a4d5-03459083bd5d')
-        REMOTE_EC2_IP = '34.201.69.100'
+        REMOTE_EC2_IP = '54.205.183.102'
         EC2_SSH_CREDENTIALS = 'c8f23aef-1897-4c34-bfd7-8b04d912c5d5'
         WORKING_DIRECTORY = '/var/www/html/'
-    }
+    }*/
 
     stages {
         stage('Check'){
@@ -20,11 +20,11 @@ pipeline {
         }
         stage('Start') {
             steps {
-                dir(WORKING_DIRECTORY) {
+                //dir(WORKING_DIRECTORY) {
                     sh "ls"
-                }
+                //}
             }
-        }
+        }/*
         stage('Build'){
             steps{
                 sh "git pull origin main"
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 archiveArtifacts 'target/*.jar'
             }
-        }
+        }*/
 
     }
 }
